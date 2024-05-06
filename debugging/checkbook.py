@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 class Checkbook:
     def __init__(self):
         self.balance = 0.0
@@ -10,6 +11,7 @@ class Checkbook:
     def withdraw(self, amount):
         if amount > self.balance:
             print("Insufficient funds to complete the withdrawal.")
+            return  # Ajout de la déclaration return ici
         else:
             self.balance -= amount
             print("Withdrew ${:.2f}".format(amount))
@@ -25,21 +27,11 @@ def main():
         if action.lower() == 'exit':
             break
         elif action.lower() == 'deposit':
-            while True:
-                try:
-                    amount = float(input("Enter the amount to deposit: $"))
-                    cb.deposit(amount)
-                    break
-                except ValueError:
-                    print("Invalid input. Please enter a numeric value.")
+            amount = float(input("Enter the amount to deposit: $"))
+            cb.deposit(amount)
         elif action.lower() == 'withdraw':
-            while True:
-                try:
-                    amount = float(input("Enter the amount to withdraw: $"))
-                    cb.withdraw(amount)
-                    break
-                except ValueError:
-                    print("Invalid input. Please enter a numeric value.")
+            amount = float(input("Enter the amount to withdraw: $"))
+            cb.withdraw(amount)
         elif action.lower() == 'balance':
             cb.get_balance()
         else:
